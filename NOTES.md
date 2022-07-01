@@ -14,16 +14,16 @@
 ## SupaBase Project Details
 
 Project URL:
-    https://agtwhwsxgdjudvmebpts.supabase.co
+  https://agtwhwsxgdjudvmebpts.supabase.co
 
 Project API keys:
-    anon public:
+  anon public:
 
-    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFndHdod3N4Z2RqdWR2bWVicHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTY1MzUxMjEsImV4cCI6MTk3MjExMTEyMX0.lrsmMZ9MHBtr2-qlqTua7ylSdIAi4DB-EBpj8JAHmU0
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFndHdod3N4Z2RqdWR2bWVicHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTY1MzUxMjEsImV4cCI6MTk3MjExMTEyMX0.lrsmMZ9MHBtr2-qlqTua7ylSdIAi4DB-EBpj8JAHmU0
 
-    service_role secret
+  service_role secret
 
-    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFndHdod3N4Z2RqdWR2bWVicHRzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY1NjUzNTEyMSwiZXhwIjoxOTcyMTExMTIxfQ.y97-Jk5Fg1_wwZjYCsOJrhdNBtQdZkn6ersT2xVKLQs
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFndHdod3N4Z2RqdWR2bWVicHRzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY1NjUzNTEyMSwiZXhwIjoxOTcyMTExMTIxfQ.y97-Jk5Fg1_wwZjYCsOJrhdNBtQdZkn6ersT2xVKLQs
 
 ## How
 
@@ -58,3 +58,11 @@ module.exports = {
   semi: true,
 };
 ```
+
+## GitHub OAUth2 Application
+
+![image](attachements/2022-07-01-23-40-45.png)
+
+
+Client ID: 42851f570f2a75769ef2
+Client Secret: 31fd5482299faf6...........

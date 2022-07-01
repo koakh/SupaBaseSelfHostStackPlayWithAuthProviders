@@ -22,6 +22,7 @@ export type AuthContextProps = {
   signUp: (payload: SupabaseAuthPayload) => void;
   signIn: (payload: SupabaseAuthPayload) => void;
   signOut: () => void;
+  signInWithGithub: (e: React.FormEvent) => void;
   loggedIn: boolean;
   loading: boolean;
   userLoading: boolean;
@@ -60,6 +61,11 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         // setServerSession here will take care of setting,
         // as well as re-setting the API maintained user session
         await setServerSession(event, session);
+        if (session?.provider_token) {
+          // use to access provider OAuth2 API
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const _oAuthToken = session.provider_token;
+        }
 
         if (user) {
           setUser(user);
@@ -116,7 +122,12 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         //   message: "Log in successful. I'll redirect you once I'm done",
         //   type: 'success',
         // });
-        handleMessage({ message: `Welcome, ${user.email}`, type: 'success' });
+        handleMessage({
+          message: payload.password.length
+            ? `Welcome, ${user.email}`
+            : `Please check your email for the magic link`,
+          type: 'success',
+        });
       }
     } catch (error) {
       handleMessage({
@@ -141,6 +152,21 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     });
   };
 
+  const signInWithGithub = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await supabase.auth.signIn(
+      { provider: 'github' },
+      {
+        // https://supabase.com/docs/reference/javascript/auth-signin
+        // While doing a 3rd party login it's common to redirect your users to a special/specific page. You can do the same by
+        // must be added to `Additional redirect URLs`
+        redirectTo: 'http://localhost:3000/github',
+        // sign In with scopes too
+        scopes: 'repo gist notifications',
+      }
+    );
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -148,6 +174,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         signUp,
         signIn,
         signOut,
+        signInWithGithub,
         loggedIn,
         loading,
         userLoading,

@@ -1,4 +1,5 @@
 export type SupabaseAuthPayload = {
   email: string;
-  password: string;
+  // optional for magic link
+  password?: string;
 };

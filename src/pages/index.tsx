@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { FaLock } from 'react-icons/fa';
+import { FaGithub, FaLock } from 'react-icons/fa';
 import { NextAppPageProps } from '~/types/app';
 import Layout from '~/components/Layout';
 import { useFormFields } from '~/lib/utils';
@@ -21,7 +21,7 @@ const FORM_VALUES: SignUpFieldProps = {
 
 const IndexPage: NextPage<NextAppPageProps> = ({}) => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const { loading, signIn, signUp } = useAuth();
+  const { loading, signIn, signUp, signInWithGithub } = useAuth();
 
   const [values, handleChange] = useFormFields<SignUpFieldProps>(FORM_VALUES);
 
@@ -51,6 +51,18 @@ const IndexPage: NextPage<NextAppPageProps> = ({}) => {
         {/* Sign Up form  */}
         <form className="w-full sm:w-1/2 xl:w-1/3" onSubmit={handleSubmit}>
           <div className="border-teal p-8 border-t-12 bg-white mb-6 rounded-lg shadow-lg">
+            {isSignIn && (
+              <>
+                <button
+                  onClick={signInWithGithub}
+                  className="flex-1 bg-gray-200 text-green-700 py-3 rounded w-full text-center shadow"
+                >
+                  <FaGithub className="inline-block text-2xl" />{' '}
+                  {isSignIn ? 'Log In' : 'Sign Up'} with <strong>Github</strong>
+                </button>
+                <hr className="my-4" />
+              </>
+            )}
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -81,8 +93,11 @@ const IndexPage: NextPage<NextAppPageProps> = ({}) => {
                 name="password"
                 type="password"
                 className="h-12 px-4 py-2 bg-white rounded shadow-inner border-gray-300 w-full border hover:border-gray-400"
-                placeholder="Your password"
-                required
+                placeholder={
+                  isSignIn
+                    ? 'Your password. Leave empty for password-less login'
+                    : 'Your password'
+                }
                 value={values.password}
                 onChange={handleChange}
               />

@@ -1,10 +1,10 @@
-export type MessageType = 'default' | 'success' | 'error'
+export type MessageType = 'default' | 'success' | 'error';
 
 export type MessageProps = {
-  type: MessageType
-  message: string
-}
+  type: MessageType;
+  message: string;
+};
 
 export type MessageListProps = {
-  messages: MessageProps[]
-}
+  messages: MessageProps[];
+};

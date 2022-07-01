@@ -1,8 +1,8 @@
-import { FunctionComponent } from 'react'
-import { Alert } from '@reach/alert'
-import classNames from 'classnames'
-import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa'
-import { MessageProps } from './message.types'
+import { FunctionComponent } from 'react';
+import { Alert } from '@reach/alert';
+import classNames from 'classnames';
+import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import { MessageProps } from './message.types';
 
 const Message: FunctionComponent<MessageProps> = ({ message, type }) => (
   <Alert
@@ -23,6 +23,6 @@ const Message: FunctionComponent<MessageProps> = ({ message, type }) => (
     )}{' '}
     &nbsp; {message}
   </Alert>
-)
+);
 
-export default Message
+export default Message;

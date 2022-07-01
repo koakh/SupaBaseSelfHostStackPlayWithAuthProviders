@@ -1,8 +1,15 @@
 # NOTES
 
+## TLDR
+
+- marioammonteiro@gmail.com
+- .klweb.......
+
 ## Links
 
 - [Project, Setup &amp; Integration feat. Next.js](https://aalam.in/blog/supabase-auth-intro-setup-next)
+
+- [Advanced Features: Debugging | Next.js](https://nextjs.org/docs/advanced-features/debugging)
 
 ## SupaBase Project Details
 

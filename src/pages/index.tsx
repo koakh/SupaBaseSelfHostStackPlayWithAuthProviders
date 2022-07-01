@@ -121,10 +121,10 @@ const IndexPage: NextPage<NextAppPageProps> = ({}) => {
   );
 };
 
-export default IndexPage;
-
 IndexPage.defaultProps = {
   meta: {
     title: 'SupaAuth - Sign Up',
   },
 };
+
+export default IndexPage;

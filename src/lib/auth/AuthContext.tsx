@@ -1,4 +1,4 @@
-import { User } from '@supabase/supabase-js';
+import { AuthChangeEvent, Session, User } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 import { createContext, FunctionComponent, useEffect, useState } from 'react';
 import { ROUTE_AUTH, ROUTE_HOME } from '~/config';
@@ -46,15 +46,23 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     if (user) {
       setUser(user);
       setLoggedIn(true);
-      router.push(ROUTE_HOME);
+      // don't redirect to profile, else we always navigate to profile page when try to access a protected page
+      // only redirect if we try to goto to / - login
+      if (router.pathname === ROUTE_AUTH) {
+        router.push(ROUTE_HOME);
+      }
     }
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
-        const innerUser = session?.user! ?? null;
+      async (event, session) => {
+        const user = session?.user! ?? null;
         setUserLoading(false);
-        if (innerUser) {
-          setUser(innerUser);
+        // setServerSession here will take care of setting,
+        // as well as re-setting the API maintained user session
+        await setServerSession(event, session);
+
+        if (user) {
+          setUser(user);
           setLoggedIn(true);
           // Your users will automatically be redirected to the `/profile` page on logging in
           router.push(ROUTE_HOME);
@@ -121,6 +129,17 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
   };
 
   const signOut = async () => supabase.auth.signOut();
+
+  // setServerSession paired with the api/auth endpoint,
+  // will take care of setting as well as removing the cookie on the server-side.
+  const setServerSession = async (event: AuthChangeEvent, session: Session) => {
+    await fetch('/api/auth', {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'same-origin',
+      body: JSON.stringify({ event, session }),
+    });
+  };
 
   return (
     <AuthContext.Provider

@@ -1,10 +1,7 @@
 import Link from 'next/link';
-import Router from 'next/router';
-import { useEffect } from 'react';
 import Layout from '~/components/Layout';
-import { SpinnerFullPage } from '~/components/Spinner';
-import { ROUTE_AUTH } from '~/config';
-import { useAuth } from '~/lib/auth'; // pull the `useAuth` hook
+import { useAuth } from '~/lib/auth';
+import { getServerSideProps } from '~/lib/auth';
 
 const ProfilePage = ({}) => {
   // the absolutely essential methods we'll need from AuthContext
@@ -13,22 +10,11 @@ const ProfilePage = ({}) => {
     user,
     // and a method to let the logged-in user sign out
     signOut,
-    loggedIn,
-    // loading state
-    userLoading,
   } = useAuth();
 
-  useEffect(() => {
-    if (!userLoading && !loggedIn) {
-      Router.push(ROUTE_AUTH);
-    }
-  }, [userLoading, loggedIn]);
-
-  if (userLoading) {
-    return <SpinnerFullPage />;
-  }
-
   return (
+    // client-side protection : wrap Layout with private layout to required authenticated user
+    // <PrivateLayout>
     <Layout useBackdrop={false}>
       <div className="h-screen flex flex-col justify-center items-center relative">
         <h2 className="text-3xl my-4">
@@ -52,7 +38,9 @@ const ProfilePage = ({}) => {
         )}
       </div>
     </Layout>
+    // </PrivateLayout>
   );
 };
 
 export default ProfilePage;
+export { getServerSideProps };

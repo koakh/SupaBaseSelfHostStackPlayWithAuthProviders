@@ -7,6 +7,7 @@ import { MessageList, useMessage } from '~/lib/message';
 type LayoutProps = {
   usePadding?: boolean;
   useBackdrop?: boolean;
+  useAuth?: boolean;
 };
 
 const FullLayout: FunctionComponent<LayoutProps> = ({
@@ -36,6 +37,7 @@ const FullLayout: FunctionComponent<LayoutProps> = ({
 FullLayout.defaultProps = {
   usePadding: true,
   useBackdrop: false,
+  useAuth: false,
 };
 
 export default FullLayout;

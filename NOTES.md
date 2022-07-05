@@ -2,8 +2,10 @@
 
 ## TLDR
 
-- marioammonteiro@gmail.com
-- .klweb.......
+postgres created user
+
+- mario???????@gmail.com
+- ???w?b???
 
 ## Links
 
@@ -13,17 +15,22 @@
 
 ## SupaBase Project Details
 
+Get Details from [Api Settings](https://app.supabase.com/project/agtwhwsxgdjudvmebpts/settings/api)
+
 Project URL:
-  https://agtwhwsxgdjudvmebpts.supabase.co
+  https://???????????.supabase.co
 
 Project API keys:
-  anon public:
+  anon | public: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
 
-  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFndHdod3N4Z2RqdWR2bWVicHRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTY1MzUxMjEsImV4cCI6MTk3MjExMTEyMX0.lrsmMZ9MHBtr2-qlqTua7ylSdIAi4DB-EBpj8JAHmU0
+  service_role | secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
 
-  service_role secret
+and use it in `env.local` ex
 
-  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFndHdod3N4Z2RqdWR2bWVicHRzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY1NjUzNTEyMSwiZXhwIjoxOTcyMTExMTIxfQ.y97-Jk5Fg1_wwZjYCsOJrhdNBtQdZkn6ersT2xVKLQs
+```shell
+NEXT_PUBLIC_SUPABASE_URL=https://???????????.supabase.co
+NEXT_PUBLIC_SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....
+```
 
 ## How
 
@@ -63,6 +70,5 @@ module.exports = {
 
 ![image](attachements/2022-07-01-23-40-45.png)
 
-
-Client ID: 42851f570f2a75769ef2
+Client ID: 42851f570f2a...........
 Client Secret: 31fd5482299faf6...........

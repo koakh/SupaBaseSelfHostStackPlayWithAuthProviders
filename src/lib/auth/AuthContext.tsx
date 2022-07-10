@@ -23,6 +23,7 @@ export type AuthContextProps = {
   signIn: (payload: SupabaseAuthPayload) => void;
   signOut: () => void;
   signInWithGithub: (e: React.FormEvent) => void;
+  signInWithKeycloak: (e: React.FormEvent) => void;
   loggedIn: boolean;
   loading: boolean;
   userLoading: boolean;
@@ -157,12 +158,25 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     await supabase.auth.signIn(
       { provider: 'github' },
       {
+        // TODO: this doesn't work
         // https://supabase.com/docs/reference/javascript/auth-signin
         // While doing a 3rd party login it's common to redirect your users to a special/specific page. You can do the same by
         // must be added to `Additional redirect URLs`
-        redirectTo: 'http://localhost:3000/github',
+        redirectTo: 'http://localhost:3030/github',
         // sign In with scopes too
         scopes: 'repo gist notifications',
+      }
+    );
+  };
+
+  const signInWithKeycloak = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await supabase.auth.signIn(
+      { provider: 'keycloak' },
+      {
+        // TODO: this doesn't work
+        redirectTo: 'http://localhost:3030/keycloak',
+        // scopes: '',
       }
     );
   };
@@ -175,6 +189,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         signIn,
         signOut,
         signInWithGithub,
+        signInWithKeycloak,
         loggedIn,
         loading,
         userLoading,

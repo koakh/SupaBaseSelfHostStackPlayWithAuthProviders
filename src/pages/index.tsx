@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { FaGithub, FaLock } from 'react-icons/fa';
+import { FaGithub, FaLock, FaKeybase } from 'react-icons/fa';
 import { NextAppPageProps } from '~/types/app';
 import Layout from '~/components/Layout';
 import { useFormFields } from '~/lib/utils';
@@ -21,7 +21,8 @@ const FORM_VALUES: SignUpFieldProps = {
 
 const IndexPage: NextPage<NextAppPageProps> = ({}) => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const { loading, signIn, signUp, signInWithGithub } = useAuth();
+  const { loading, signIn, signUp, signInWithGithub, signInWithKeycloak } =
+    useAuth();
 
   const [values, handleChange] = useFormFields<SignUpFieldProps>(FORM_VALUES);
 
@@ -58,7 +59,16 @@ const IndexPage: NextPage<NextAppPageProps> = ({}) => {
                   className="flex-1 bg-gray-200 text-green-700 py-3 rounded w-full text-center shadow"
                 >
                   <FaGithub className="inline-block text-2xl" />{' '}
-                  {isSignIn ? 'Log In' : 'Sign Up'} with <strong>Github</strong>
+                  {isSignIn ? 'Log In' : 'Sign Up'} with <strong>GitHub</strong>
+                </button>
+                <hr className="my-4" />
+                <button
+                  onClick={signInWithKeycloak}
+                  className="flex-1 bg-gray-200 text-green-700 py-3 rounded w-full text-center shadow"
+                >
+                  <FaKeybase className="inline-block text-2xl" />{' '}
+                  {isSignIn ? 'Log In' : 'Sign Up'} with{' '}
+                  <strong>Keycloak</strong>
                 </button>
                 <hr className="my-4" />
               </>

@@ -1,5 +1,25 @@
 # NOTES
 
+- [NOTES](#notes)
+  - [TLDR](#tldr)
+  - [Links](#links)
+  - [SupaBase Project Details](#supabase-project-details)
+  - [How](#how)
+    - [Enabled Show error on Repeated User](#enabled-show-error-on-repeated-user)
+    - [Enable Semi](#enable-semi)
+  - [GitHub OAUth2 Application](#github-oauth2-application)
+  - [Add Keycloak Integration](#add-keycloak-integration)
+    - [Without Docker Compose](#without-docker-compose)
+      - [PostgreSQL Example](#postgresql-example)
+      - [Start a PostgreSQL instance](#start-a-postgresql-instance)
+      - [Start a Keycloak instance](#start-a-keycloak-instance)
+    - [With Docker Compose](#with-docker-compose)
+    - [Supabase Keycloak Errors](#supabase-keycloak-errors)
+      - [Keycloak Login results in Error: "Unable to exchange external code" #516](#keycloak-login-results-in-error-unable-to-exchange-external-code-516)
+      - [Keycloak user required valid email and verified email](#keycloak-user-required-valid-email-and-verified-email)
+      - [GoTrue required ENABLE_EMAIL_AUTOCONFIRM true to prevent sent mail and crash on SMTP connect to localhost:53](#gotrue-required-enable_email_autoconfirm-true-to-prevent-sent-mail-and-crash-on-smtp-connect-to-localhost53)
+      - [Invalid Keycloak supabase Client Secret](#invalid-keycloak-supabase-client-secret)
+
 ## TLDR
 
 postgres created user
@@ -137,20 +157,30 @@ https://agtwhwsxgdjudvmebpts.supabase.co/auth/v1/callback
 
 client_secret: VFNzhF6nzpSDc6bLNbV5WwgJNywf6zJy
 
-### Keycloak Errors
+### Supabase Keycloak Errors
+
+occur with hosted and self hosted
+
+####  Keycloak Login results in Error: "Unable to exchange external code" #516 
 
 - [Keycloak Login results in Error: &quot;Unable to exchange external code&quot; · Issue #516 · supabase/gotrue](https://github.com/supabase/gotrue/issues/516)
+
+> issue that I participate and have some insights
+
 - [Third party auth login: &quot;Unable to exchange external code: &lt;code&gt;&quot; · Discussion #1192 · supabase/supabase](https://github.com/supabase/supabase/discussions/1192)
 
-wip....
+this error can occurs because of a lot of things, better to see logs
 
-keycloak errror Unable+to+exchange+external+code
-- [Keycloak Login results in Error: &quot;Unable to exchange external code&quot; · Issue #516 · supabase/gotrue](https://github.com/supabase/gotrue/issues/516)
-because of wrong secret in supabase hosted ????
-http://localhost:3030/?error=server_error&error_description=Unable+to+exchange+external+code%3A+e6eefb72-dd75-447b-879d-231d4937c065.b97230b5-c617-4379-9334-cfdb3fe0905c.dfae8b4b-e82d-466c-ac57-d112d9b92d7c
+- gotrue cant't connect to localhost:8080
+- wrong keycloak client secret
+- login user don't have email
+- login user email is not Verified
+- smtp fails to send mail
 
+check if keycloak provider exists, seem not
 
-curl -s localhost:9999/settings | jq .external
+```
+$ curl -s localhost:9999/settings | jq .external
 {
   "apple": false,
   "azure": false,
@@ -171,63 +201,36 @@ curl -s localhost:9999/settings | jq .external
   "saml": false,
   "zoom": false
 }
+```
 
 seems that keycloak is not in providers
 
-supabase/gotrue:v2.5.21 > supabase/gotrue:v2.7.2
+change `supabase/gotrue:v2.5.21` version to `supabase/gotrue:v2.7.2` in `docker-compose.yml`
 
-
-
-![image](2022-07-08-22-38-23.png)
-
-fixed adding 
-GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI: "http://localhost:3030"
-
-
-
-
-error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
-
-
-
-keycloak with hosted self and self hosted
-Unable to exchange external code: a43362ef-dfb7-4df8-b955-ea87b5be320e.0f80452a-f3ab-4c94-97ea-56c789dcb819.dfae8b4b-e82d-466c-ac57-d112d9b92d7c
-
-
+double check
 
 ```shell
-$ docker-compose down && docker-compose up -d && docker-compose logs -f auth
-```
-
-time="2022-07-08T22:42:19Z" level=error msg="500: Unable to exchange external code: 5da827e7-fcee-46c5-a3c3-f5e908a9f89f.ea289a44-b80e-4c24-b48c-1d0747266cfe.234c8eb6-706a-4083-814e-56a1a514e557" component=api error="Post \"http://localhost:8080/auth/realms/SupaBase/protocol/openid-connect/token\": dial tcp 127.0.0.1:8080: connect: connection refused" method=GET path=/callback referer= remote_addr="192.168.128.1:51720" request_id=f9b52284-7721-475b-a379-c552c978fec9
-
-http://localhost:8080/auth/realms/SupaBase
-
-```json
+$ curl -s localhost:9999/settings | jq .external
 {
-  "realm": "SupaBase",
-  "public_key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAllKy7UPI9i1x9O4OPvOtWSE4DM1kmuQUZVa7rOS5yR02HY5nF3acPn2Bx0RP7ZjAdyaQKaU2umvLPIXYKESVjZhlgEwHLi3u8jx6fecJo0BbgMXpKxiAczqGNVqdXjea7L5G87Jpeo1G/EwjpANJL3FtbHMfsY2kqTcJnOzQT0McLr4cD5c1Bpsh8FI6pQSs+QLbhd0V42ANaOnXpg0l+0rX0uWdoSUbM28DnMb442+0+X3eQKN0FLYRFBg3MgaELViSQB3iqVkCGxtcJOOCmUC8CnjZ2g2kIbXcWUt6kEape9L7Edj1lu6tSUFjZgtNIHd1fOlD4+R/JA74kgh71wIDAQAB",
-  "token-service": "http://localhost:8080/auth/realms/SupaBase/protocol/openid-connect",
-  "account-service": "http://localhost:8080/auth/realms/SupaBase/account",
-  "tokens-not-before": 0
+  "github": true,
+  "keycloak": true,
+  "email": true,
+  "phone": true,
 }
 ```
 
-adding keycloak to supabase stack now it connects and exchange code
+start fix **Unable to exchange external code** keycloak with hosted self and self hosted
 
-supabase-auth | time="2022-07-08T22:54:18Z" level=info msg="request started" component=api method=GET path=/authorize referer="http://localhost:3030/" remote_addr="192.168.224.1:46474" request_id=88add4ea-095c-40eb-b48e-f5feb7e9155e
-supabase-auth | time="2022-07-08T22:54:18Z" level=info msg="Redirecting to external provider" component=api method=GET path=/authorize provider=keycloak referer="http://localhost:3030/" remote_addr="192.168.224.1:46474" request_id=88add4ea-095c-40eb-b48e-f5feb7e9155e
-supabase-auth | time="2022-07-08T22:54:18Z" level=info msg="request completed" component=api duration=261315 method=GET path=/authorize referer="http://localhost:3030/" remote_addr="192.168.224.1:46474" request_id=88add4ea-095c-40eb-b48e-f5feb7e9155e status=302
+```shell
+# log containers
+$ docker-compose logs -f auth keycloak
+# outcome
+time="2022-07-08T22:42:19Z" level=error msg="500: Unable to exchange external code: 5da827e7-fcee-46c5-a3c3-f5e908a9f89f.ea289a44-b80e-4c24-b48c-1d0747266cfe.234c8eb6-706a-4083-814e-56a1a514e557" component=api error="Post \"http://localhost:8080/auth/realms/SupaBase/protocol/openid-connect/token\": dial tcp 127.0.0.1:8080: connect: connection refused" method=GET path=/callback referer= remote_addr="192.168.128.1:51720" request_id=f9b52284-7721-475b-a379-c552c978fec9
+```
 
-but now lands in a keycloak page not found
+gotrue container trying to connect to keycloak ate localhost:8080, obvious it will never work
 
-
-
-
-supabase-keycloak | 00:05:21,635 WARN  [org.keycloak.models.utils.RepresentationToModel] (default task-3) Referenced client scope 'acr' doesn't exist. Ignoring
-supabase-keycloak | 00:06:30,760 WARN  [org.keycloak.services] (default task-6) KC-SERVICES0091: Request is missing scope 'openid' so it's not treated as OIDC, but just pure OAuth2 request.
-supabase-keycloak | 00:06:40,453 WARN  [org.keycloak.events] (default task-6) type=LOGIN_ERROR, realmId=SupaBase, clientId=supabase, userId=efa7afbb-adc5-42ec-8c86-2ab5b5d94931, ipAddress=192.168.96.1, error=invalid_user_credentials, auth_method=openid-connect, auth_type=code, redirect_uri=https://agtwhwsxgdjudvmebpts.supabase.co/auth/v1/callback, code_id=df585fe1-96d5-4644-9cf5-0868974ec708, username=mario, authSessionParentId=df585fe1-96d5-4644-9cf5-0868974ec708, authSessionTabId=i3SJJL0-uNc
-
+try with host machine docker network ip
 
 - [How to access host port from docker container](https://stackoverflow.com/questions/31324981/how-to-access-host-port-from-docker-container)
 
@@ -235,28 +238,24 @@ supabase-keycloak | 00:06:40,453 WARN  [org.keycloak.events] (default task-6) ty
 $ ip addr show docker0 | grep -Po 'inet \K[\d.]+'
 ```
 
+it works
 
+#### Keycloak user required valid email and verified email
 
 keycloak user required mail else it crashs
 ex marioammonteiro@gmail.com
 
-ENABLE_EMAIL_AUTOCONFIRM=true
-must be true else smtp fails and fails oauth login
+<http://localhost:3030/#error=unauthorized_client&error_code=401&error_description=Unverified+email+with+keycloak>
+#### GoTrue required ENABLE_EMAIL_AUTOCONFIRM true to prevent sent mail and crash on SMTP connect to localhost:53
 
-on hosted
-change details and RESTART INSTANCE else
+change `ENABLE_EMAIL_AUTOCONFIRM=false` to `ENABLE_EMAIL_AUTOCONFIRM=true`
 
+#### Invalid Keycloak supabase Client Secret
+
+```
 error_description
 	Unable to exchange external code: 01983613-6f52-463f-b757-0a08e1b224d8.ed3a41d4-41a3-4f57-8e6f-ecf437f41b4b.07182b43-bb2b-4957-a0a8-84239ddefd3a
   check client secret in keycloak and supabase
   keycloak logs
   supabase-keycloak  | 23:38:53,987 WARN  [org.keycloak.events] (default task-39) type=CODE_TO_TOKEN_ERROR, realmId=SupaBase, clientId=supabase, userId=null, ipAddress=18.133.225.233, error=invalid_client_credentials, grant_type=authorization_code
-
-
-http://localhost:3030/#error=unauthorized_client&error_code=401&error_description=Unverified+email+with+keycloak
-check verified mail is users  
-
-
-final hosted working version
-
-![image](attachements/2022-07-10-00-51-51.png)
+```

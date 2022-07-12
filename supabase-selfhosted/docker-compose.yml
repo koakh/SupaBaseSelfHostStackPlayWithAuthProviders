@@ -46,6 +46,8 @@ services:
     # image: supabase/gotrue:v2.5.21
     # image: supabase/gotrue:latest
     image: supabase/gotrue:v2.7.2
+    # dev image
+    # image: supabasegotruerepo_gotrue
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: unless-stopped
@@ -53,7 +55,7 @@ services:
       - ${AUTH_HTTP_PORT}:9999/tcp
     environment:
       GOTRUE_API_HOST: 0.0.0.0
-      GOTRUE_API_PORT: 9999
+      GOTRUE_API_PORT: ${AUTH_HTTP_PORT}
 
       GOTRUE_DB_DRIVER: postgres
       GOTRUE_DB_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?search_path=auth
@@ -101,11 +103,14 @@ services:
       # keycloak
       GOTRUE_EXTERNAL_KEYCLOAK_ENABLED: "true"
       GOTRUE_EXTERNAL_KEYCLOAK_CLIENT_ID: "supabase"
-      GOTRUE_EXTERNAL_KEYCLOAK_SECRET: "pwJi9Js279GAT4ciqQ3yPFQ06a93tKqZ"
+      GOTRUE_EXTERNAL_KEYCLOAK_SECRET: "sgTbz86zgZgdL8x7YtPzthZUlkDo0Wup"
       # Unable to exchange external code
       # GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "http://localhost:3030/keycloak"
       GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
+      # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+'
       GOTRUE_EXTERNAL_KEYCLOAK_URL: "http://172.17.0.1:8080/auth/realms/SupaBase"
+      # prod
+      # GOTRUE_EXTERNAL_KEYCLOAK_URL: "https://keycloak.kuartzo.com/auth/realms/SupaBase"
 
   rest:
     container_name: supabase-rest

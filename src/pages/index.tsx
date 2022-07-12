@@ -21,8 +21,14 @@ const FORM_VALUES: SignUpFieldProps = {
 
 const IndexPage: NextPage<NextAppPageProps> = ({}) => {
   const [isSignIn, setIsSignIn] = useState(true);
-  const { loading, signIn, signUp, signInWithGithub, signInWithKeycloak } =
-    useAuth();
+  const {
+    loading,
+    signIn,
+    signUp,
+    signInWithGithub,
+    signInWithKeycloak,
+    signInWithOryHydra,
+  } = useAuth();
 
   const [values, handleChange] = useFormFields<SignUpFieldProps>(FORM_VALUES);
 
@@ -69,6 +75,15 @@ const IndexPage: NextPage<NextAppPageProps> = ({}) => {
                   <FaKeybase className="inline-block text-2xl" />{' '}
                   {isSignIn ? 'Log In' : 'Sign Up'} with{' '}
                   <strong>Keycloak</strong>
+                </button>
+                <hr className="my-4" />
+                <button
+                  onClick={signInWithOryHydra}
+                  className="flex-1 bg-gray-200 text-green-700 py-3 rounded w-full text-center shadow"
+                >
+                  <FaKeybase className="inline-block text-2xl" />{' '}
+                  {isSignIn ? 'Log In' : 'Sign Up'} with{' '}
+                  <strong>OryHydra</strong>
                 </button>
                 <hr className="my-4" />
               </>

@@ -24,6 +24,7 @@ export type AuthContextProps = {
   signOut: () => void;
   signInWithGithub: (e: React.FormEvent) => void;
   signInWithKeycloak: (e: React.FormEvent) => void;
+  signInWithOryHydra: (e: React.FormEvent) => void;
   loggedIn: boolean;
   loading: boolean;
   userLoading: boolean;
@@ -174,8 +175,20 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     await supabase.auth.signIn(
       { provider: 'keycloak' },
       {
-        // TODO: this doesn't work
         redirectTo: 'http://localhost:3030/keycloak',
+        // scopes: '',
+      }
+    );
+  };
+
+  const signInWithOryHydra = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await supabase.auth.signIn(
+      // TODO: add type to
+      // node_modules/@supabase/gotrue-js/src/lib/types.ts
+      { provider: 'oryhydra' },
+      {
+        redirectTo: 'http://localhost:3030/oryhydra',
         // scopes: '',
       }
     );
@@ -190,6 +203,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         signOut,
         signInWithGithub,
         signInWithKeycloak,
+        signInWithOryHydra,
         loggedIn,
         loading,
         userLoading,

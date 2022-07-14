@@ -18,5 +18,8 @@
     "supabase",
     "tailwindcss",
     "Varela"
-  ]
+  ],
+  "explorer.hideFolders": {
+    "node_modules_"
+  }
 }

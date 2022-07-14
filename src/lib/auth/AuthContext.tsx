@@ -186,6 +186,8 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     await supabase.auth.signIn(
       // TODO: add type to
       // node_modules/@supabase/gotrue-js/src/lib/types.ts
+      // require to add `ignoreBuildErrors: true` to `next.config.js`
+      // eslint-disable-next-line
       { provider: 'oryhydra' },
       {
         redirectTo: 'http://localhost:3030/oryhydra',

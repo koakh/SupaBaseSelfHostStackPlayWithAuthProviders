@@ -11,7 +11,10 @@
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
     "format": "npm run prettier -- --write",
     "format-check": "npm run prettier -- --list-different",
-    "validate": "npm-run-all --parallel type-check format-check lint build"
+    "validate": "npm-run-all --parallel type-check format-check lint build",
+    "docker:build": "docker build -t nextjs-supabase-supaauth .",
+    "docker:run": "docker run -p 3030:3000 nextjs-supabase-supaauth .",
+    "docker:push": "docker build -t nextjs-supabase-supaauth ."
   },
   "dependencies": {
     "@reach/alert": "^0.14.0",

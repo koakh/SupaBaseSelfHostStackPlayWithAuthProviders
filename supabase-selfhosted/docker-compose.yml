@@ -45,9 +45,9 @@ services:
     container_name: supabase-auth
     # image: supabase/gotrue:v2.5.21
     # image: supabase/gotrue:latest
-    image: supabase/gotrue:v2.7.2
+    # image: supabase/gotrue:v2.7.2
     # dev image
-    # image: supabasegotruerepo_gotrue
+    image: supabasegotruerepo_gotrue:latest
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: unless-stopped
@@ -111,6 +111,12 @@ services:
       GOTRUE_EXTERNAL_KEYCLOAK_URL: "http://172.17.0.1:8080/auth/realms/SupaBase"
       # prod
       # GOTRUE_EXTERNAL_KEYCLOAK_URL: "https://keycloak.kuartzo.com/auth/realms/SupaBase"
+
+      GOTRUE_EXTERNAL_ORYHYDRA_ENABLED: "true"
+      GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-13"
+      GOTRUE_EXTERNAL_ORYHYDRA_SECRET: ".lZbO5k8wJVsBHkPaSTQyM4BZG"
+      GOTRUE_EXTERNAL_ORYHYDRA_REDIRECT_URI: "http://localhost:9999/callback"
+      GOTRUE_EXTERNAL_ORYHYDRA_URL: "https://kuartzo.com:444"
 
   rest:
     container_name: supabase-rest
@@ -235,6 +241,7 @@ services:
       DB_ADDR: ${POSTGRES_HOST}
       # db must be postgres same has supabase, else fails running container
       DB_DATABASE: ${POSTGRES_DB}
+      # trick must use public schema else don't create tables
       DB_SCHEMA: public
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}

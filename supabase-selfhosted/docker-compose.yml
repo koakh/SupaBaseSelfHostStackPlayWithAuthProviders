@@ -257,3 +257,9 @@ services:
       # - ./volumes/keycloak/data:/opt/jboss/keycloak/standalone/data/
     depends_on:
       - db
+
+    # supaauth:
+    #   image: koakh/nextjs-supabase-supaauth:1.0.0
+    #   container_name: supabase-supaauth
+    #   ports:
+    #     - 3030:8080

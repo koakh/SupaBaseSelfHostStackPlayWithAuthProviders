@@ -2,7 +2,9 @@ module.exports = {
   images: {
     domains: [],
   },
-  // output: 'standalone',
+  // required for docker image
+  output: 'standalone',
+  // required to fix oryhydra provider type problem
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

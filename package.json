@@ -12,9 +12,9 @@
     "format": "npm run prettier -- --write",
     "format-check": "npm run prettier -- --list-different",
     "validate": "npm-run-all --parallel type-check format-check lint build",
-    "docker:build": "docker build -t nextjs-supabase-supaauth . && docker tag nextjs-supabase-supaauth koakh/nextjs-supabase-supaauth:1.0.0",
-    "docker:run": "docker run -p 3030:3000 nextjs-supabase-supaauth",
-    "docker:push": "docker push koakh/nextjs-supabase-supaauth:1.0.0"
+    "docker:build": "docker build -t koakh-nextjs-supabase-supaauth . && docker tag koakh-nextjs-supabase-supaauth koakh/koakh-nextjs-supabase-supaauth:1.0.0",
+    "docker:run": "docker run -p 3030:3030 koakh-nextjs-supabase-supaauth:1.0.0",
+    "docker:push": "docker push koakh/koakh-nextjs-supabase-supaauth:1.0.0"
   },
   "dependencies": {
     "@reach/alert": "^0.17.0",

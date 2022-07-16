@@ -47,7 +47,8 @@ services:
     # image: supabase/gotrue:latest
     # image: supabase/gotrue:v2.7.2
     # dev image
-    image: supabasegotruerepo_gotrue:latest
+    # image: koakh/koakh-supabase-gotrue:1.0.0
+    image: koakh-supabase-gotrue:latest
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: unless-stopped
@@ -104,19 +105,21 @@ services:
       GOTRUE_EXTERNAL_KEYCLOAK_ENABLED: "true"
       GOTRUE_EXTERNAL_KEYCLOAK_CLIENT_ID: "supabase"
       GOTRUE_EXTERNAL_KEYCLOAK_SECRET: "sgTbz86zgZgdL8x7YtPzthZUlkDo0Wup"
-      # Unable to exchange external code
-      # GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "http://localhost:3030/keycloak"
       GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
-      # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+'
+      # this url must be accessed from client/browser url, use docker or a online public ip
+      # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+' or use keycloak in url but required add to hosts `172.17.0.1 keycloak`, 172.17.0.1 works without need to add to hssts
       GOTRUE_EXTERNAL_KEYCLOAK_URL: "http://172.17.0.1:8080/auth/realms/SupaBase"
       # prod
       # GOTRUE_EXTERNAL_KEYCLOAK_URL: "https://keycloak.kuartzo.com/auth/realms/SupaBase"
 
       GOTRUE_EXTERNAL_ORYHYDRA_ENABLED: "true"
-      GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-13"
-      GOTRUE_EXTERNAL_ORYHYDRA_SECRET: ".lZbO5k8wJVsBHkPaSTQyM4BZG"
       GOTRUE_EXTERNAL_ORYHYDRA_REDIRECT_URI: "http://localhost:9999/callback"
       GOTRUE_EXTERNAL_ORYHYDRA_URL: "https://kuartzo.com:444"
+      # GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-13"
+      # GOTRUE_EXTERNAL_ORYHYDRA_SECRET: ".lZbO5k8wJVsBHkPaSTQyM4BZG"
+      GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-14"
+      GOTRUE_EXTERNAL_ORYHYDRA_SECRET: "359XOMNiLpDT8sRN6BA6UjB.y4"
+
 
   rest:
     container_name: supabase-rest
@@ -258,8 +261,16 @@ services:
     depends_on:
       - db
 
-    # supaauth:
-    #   image: koakh/nextjs-supabase-supaauth:1.0.0
-    #   container_name: supabase-supaauth
-    #   ports:
-    #     - 3030:8080
+  supaauth:
+    # image: koakh/koakh-nextjs-supabase-supaauth:1.0.0
+    image: koakh-nextjs-supabase-supaauth
+    container_name: supabase-supaauth
+    ports:
+      - 3030:3030
+    environment:
+      # this url must be accessed from client/browser url, use docker or a online public ip
+      # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+' or use kong in url but required add to hosts `172.17.0.1 kong`, 172.17.0.1 works without need to add to hssts
+      NEXT_PUBLIC_SUPABASE_URL: http://172.17.0.1:8000
+      NEXT_PUBLIC_SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
+    depends_on:
+      - kong

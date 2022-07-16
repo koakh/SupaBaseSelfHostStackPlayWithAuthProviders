@@ -259,3 +259,5 @@ error_description
   keycloak logs
   supabase-keycloak  | 23:38:53,987 WARN  [org.keycloak.events] (default task-39) type=CODE_TO_TOKEN_ERROR, realmId=SupaBase, clientId=supabase, userId=null, ipAddress=18.133.225.233, error=invalid_client_credentials, grant_type=authorization_code
 ```
+
+lost track of this error

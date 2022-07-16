@@ -8,6 +8,7 @@ mkdir ${DIR} -p
 touch .bak/${FILE_EXCLUDE}
 touch node_modules/${FILE_EXCLUDE}
 touch .vscode/chrome/${FILE_EXCLUDE}
+touch .next/cache/${FILE_EXCLUDE}
 
 tar -zcvf ${FILE} \
 	--exclude-tag-all=${FILE_EXCLUDE} \

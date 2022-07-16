@@ -46,6 +46,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     const user = supabase.auth.user();
 
     setUserLoading(false);
+
     if (user) {
       setUser(user);
       setLoggedIn(true);

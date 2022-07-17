@@ -1,0 +1,415 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.3
+# Built for x86_64-suse-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sun Jul 17 23:50:41 2022
+
+# Variables
+
+# environment
+JAVA_HOME = /usr/lib/jvm/jdk-11.0.13+8
+# environment
+QEMU_AUDIO_DRV = pa
+# environment
+GDK_BACKEND = x11
+# environment
+LC_ALL = C
+# environment
+NO_AT_BRIDGE = 1
+# environment
+PNPM_HOME = /home/mario/.local/share/pnpm
+# environment
+GTK_RC_FILES = /etc/gtk/gtkrc:/home/mario/.gtkrc:/home/mario/.config/gtkrc
+# environment
+TMPDIR = /tmp
+# environment
+WINDOWMANAGER = /usr/bin/startplasma-x11
+# environment
+LC_NUMERIC = pt_PT.UTF-8
+# environment
+VSCODE_CWD = /mnt/storage/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
+# environment
+GPG_TTY = /dev/pts/10
+# environment
+MACHTYPE = x86_64-suse-linux
+# environment
+NVM_DIR = /home/mario/.nvm
+# default
+MAKE_COMMAND := make
+# environment
+GOPATH = /home/mario/work
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+PYTHONSTARTUP = /etc/pythonstart
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/mario/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
+# environment
+HOST = koakh-laptop
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+MORE = -sl
+# environment
+HOSTNAME = koakh-laptop
+# environment
+MAIL = /var/spool/mail/mario
+# environment
+XNLSPATH = /usr/share/X11/nls
+# environment
+XDG_DATA_DIRS = /home/mario/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/share:/var/lib/snapd/desktop
+# environment
+OLDPWD = /home/mario/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders/keycloak
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = /home/mario/.config/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
+# environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+# environment
+PROFILEREAD = true
+# environment
+SSH_ASKPASS = /usr/libexec/ssh/ssh-askpass
+# environment
+LANG = C
+# environment
+GUESTFISH_OUTPUT = \e[0m
+# environment
+XAUTHORITY = /run/user/1000/xauth_rSWqMz
+# default
+.LOADED := 
+# environment
+FROM_HEADER = 
+# environment
+MANPATHISSET = yes
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+GUESTFISH_INIT = \e[1;34m
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /mnt/storage/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+LESSOPEN = lessopen.sh %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXXboYTtb/agent.19493
+# default
+.SHELLFLAGS := -c
+# environment
+HISTSIZE = 1000
+# environment
+XDG_CONFIG_DIRS = /home/mario/.config/kdedefaults:/etc/xdg:/usr/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XCURSOR_THEME = breeze_cursors
+# environment
+LESSKEY = /usr/etc/lesskey.bin
+# environment
+XDG_SESSION_DESKTOP = KDE
+# makefile
+MAKEFILE_LIST := 
+# automatic
+@F = $(notdir $@)
+# environment
+LC_COLLATE = pt_PT.UTF-8
+# environment
+VSCODE_PID = 22634
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+XAUTHLOCALHOSTNAME = koakh-laptop
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+SDK_HOME = /usr/lib/jvm/jdk-11.0.13+8
+# environment
+SESSION_MANAGER = local/koakh-laptop:@/tmp/.ICE-unix/19721,unix/koakh-laptop:/tmp/.ICE-unix/19721
+# automatic
+*F = $(notdir $*)
+# environment
+MANPATH = /usr/local/man:/usr/share/man
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+JAVA_ROOT = /usr/lib/jvm/jdk-11.0.13+8
+# environment
+LESS_ADVANCED_PREPROCESSOR = no
+# environment
+JAVA_BINDIR = /usr/lib/jvm/jdk-11.0.13+8/bin
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-suse-linux-gnu
+# environment
+ANDROID_HOME = /home/mario/Android/Sdk
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=local
+# environment
+SHLVL = 3
+# environment
+MAKELEVEL := 0
+# environment
+_fish_MC_PWD_FILE = /tmp/mc-mario/mc.pwd.20303
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/mario/.local/share/pnpm:/home/mario/.local/share/solana/install/active_release/bin:/usr/lib/jvm/jdk-11.0.13+8/bin:/home/mario/.local/share/solana/install/active_release/bin:/home/mario/.local/share/pnpm:/home/mario/.cargo/bin:/home/mario/.local/share/solana/install/active_release/bin:/usr/lib/jvm/jdk-11.0.13+8/bin:/home/mario/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin:/home/mario/Android/Sdk/tools:/home/mario/Android/Sdk/platform-tools:/opt/flutter/bin:/usr/local/go/bin:/home/mario/Android/Sdk/tools:/home/mario/Android/Sdk/platform-tools:/opt/flutter/bin:/usr/local/go/bin
+# default
+MAKEFILES := 
+# environment
+LC_MONETARY = pt_PT.UTF-8
+# automatic
+^F = $(notdir $^)
+# environment
+LC_TIME = pt_PT.UTF-8
+# environment
+OSTYPE = linux
+# environment
+MC_TMPDIR = /tmp/mc-mario
+# environment
+INVOCATION_ID = 3374ddda77454b5580fc1e7235d60cd5
+# environment
+MINICOM = -c on
+# environment
+CPU = x86_64
+# environment
+LESSCLOSE = lessclose.sh %s %s
+# automatic
+?F = $(notdir $?)
+# environment
+KDE_APPLICATIONS_AS_SCOPE = 1
+# environment
+GUESTFISH_PS1 = \[\e[1;32m\]><fs>\[\e[0;31m\]
+# environment
+XDG_SEAT = seat0
+# environment
+XSESSION_IS_UP = yes
+# environment
+GTK_IM_MODULE = cedilla
+# environment
+XDG_CURRENT_DESKTOP = KDE
+# environment
+HOSTTYPE = x86_64
+# environment
+LS_COLORS = no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=41;33;01:ex=00;32:*.cmd=00;32:*.exe=01;32:*.com=01;32:*.bat=01;32:*.btm=01;32:*.dll=01;32:*.tar=00;31:*.tgz=00;31:*.arc=00;31:*.arj=00;31:*.taz=00;31:*.lha=00;31:*.lz4=00;31:*.lzh=00;31:*.lzma=00;31:*.tlz=00;31:*.txz=00;31:*.tzo=00;31:*.t7z=00;31:*.zip=00;31:*.z=00;31:*.Z=00;31:*.dz=00;31:*.gz=00;31:*.lrz=00;31:*.lz=00;31:*.lzo=00;31:*.xz=00;31:*.zst=00;31:*.tzst=00;31:*.bz2=00;31:*.bz=00;31:*.tbz=00;31:*.tbz2=00;31:*.tz=00;31:*.deb=00;31:*.rpm=00;31:*.jar=00;31:*.war=00;31:*.ear=00;31:*.sar=00;31:*.rar=00;31:*.alz=00;31:*.ace=00;31:*.zoo=00;31:*.cpio=00;31:*.7z=00;31:*.rz=00;31:*.cab=00;31:*.wim=00;31:*.swm=00;31:*.dwm=00;31:*.esd=00;31:*.asf=01;35:*.avi=01;35:*.bmp=01;35:*.cgm=01;35:*.dl=01;35:*.emf=01;35:*.flc=01;35:*.fli=01;35:*.flv=01;35:*.gif=01;35:*.gl=01;35:*.jpeg=01;35:*.jpg=01;35:*.m2v=01;35:*.m4v=01;35:*.mjpeg=01;35:*.mjpg=01;35:*.mkv=01;35:*.mng=01;35:*.mov=01;35:*.mp4=01;35:*.mp4v=01;35:*.mpeg=01;35:*.mpg=01;35:*.nuv=01;35:*.ogm=01;35:*.pbm=01;35:*.pcx=01;35:*.pgm=01;35:*.png=01;35:*.ppm=01;35:*.qt=01;35:*.rm=01;35:*.rmvb=01;35:*.svg=01;35:*.svgz=01;35:*.tga=01;35:*.tif=01;35:*.tiff=01;35:*.vob=01;35:*.webm=01;35:*.webp=01;35:*.wmv=01;35:*.xbm=01;35:*.xcf=01;35:*.xpm=01;35:*.xwd=01;35:*.yuv=01;35:*.ogv=01;35:*.ogx=01;35:*.aiff=00;32:*.ape=00;32:*.aac=00;32:*.au=00;32:*.flac=00;32:*.m4a=00;32:*.mid=00;32:*.midi=00;32:*.mka=00;32:*.mp3=00;32:*.mpc=00;32:*.ogg=00;32:*.ra=00;32:*.voc=00;32:*.wav=00;32:*.wma=00;32:*.wv=00;32:*.oga=00;32:*.opus=00;32:*.spx=00;32:*.xspf=00;32:
+# automatic
++F = $(notdir $+)
+# environment
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# environment
+LESS = -M -I -R
+# environment
+DESKTOP_SESSION = /usr/share/xsessions/plasma5
+# environment
+CONFIG_SITE = /usr/share/site/x86_64-pc-linux-gnu
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = KDE
+# environment
+MC_SID = 16967
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = mario
+# environment
+QT_IM_SWITCHER = imsw-multi
+# environment
+AUDIODRIVER = pulseaudio
+# environment
+G_FILENAME_ENCODING = @locale,UTF-8,ISO-8859-15,CP1252
+# environment
+XDG_VTNR = 7
+# makefile
+.DEFAULT_GOAL := 
+# environment
+SYSTEMD_EXEC_PID = 19882
+# environment
+HISTCONTROL = ignoreboth
+# environment
+DISPLAY = :0
+# environment
+GTK_MODULES = canberra-gtk-module
+# environment
+USER = mario
+# default
+MAKE_VERSION := 4.3
+# environment
+KDE_SESSION_UID = 1000
+# environment
+GUAKE_TAB_UUID = 7e0d688b-142e-4b9b-8147-4f2110df5d3d
+# environment
+MANAGERPID = 19479
+# environment
+LC_MEASUREMENT = pt_PT.UTF-8
+# environment
+CVS_RSH = ssh
+# environment
+SSH_AGENT_PID = 19672
+# environment
+PAGER = less
+# environment
+_ = /usr/bin/make
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+G_BROKEN_FILENAMES = 1
+# environment
+COLORTERM = truecolor
+# environment
+NVM_CD_FLAGS = 
+# environment
+GOMODCACHE = /home/mario/work/pkg/mod
+# environment
+JOURNAL_STREAM = 8:53810
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+XKEYSYMDB = /usr/X11R6/lib/X11/XKeysymDB
+# environment
+ 
+GTK2_RC_FILES = /etc/gtk-2.0/gtkrc:/home/mario/.gtkrc-2.0:/home/mario/.config/gtkrc-2.0
+# environment
+HOME = /home/mario
+# environment
+QT_IM_MODULE = xim
+# environment
+CSHEDIT = emacs
+# environment
+JDK_HOME = /usr/lib/jvm/jdk-11.0.13+8
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-c32a2d28-1.69.1-main.sock
+# environment
+TERM = xterm-256color
+# environment
+XDG_SESSION_ID = 3
+# environment
+XCURSOR_SIZE = 24
+# environment
+GOPROXY = https://proxy.golang.org,direct
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# environment
+GUESTFISH_RESTORE = \e[0m
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+VTE_VERSION = 6800
+# environment
+LS_OPTIONS = -N --color=tty -T 0
+# environment
+KDE_SESSION_VERSION = 5
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+KDE_FULL_SESSION = true
+# environment
+JRE_HOME = /usr/lib64/jvm/java-11-openjdk-11
+# variable set hash-table stats:
+# Load=165/1024=16%, Rehash=0, Collisions=23/192=12%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 66311, inode 791989): 11 files, no impossibilities.
+
+# 11 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+GNUmakefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 19 / storage = 195 B / avg = 10 B
+# current buf: size = 8162 B / used = 195 B / count = 19 / avg = 10 B
+
+# strcache performance: lookups = 22 / hit rate = 13%
+# hash-table stats:
+# Load=19/8192=0%, Rehash=0, Collisions=0/22=0%
+# Finished Make data base on Sun Jul 17 23:50:41 2022
+
+ 

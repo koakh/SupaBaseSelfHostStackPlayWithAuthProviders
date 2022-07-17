@@ -1,0 +1,286 @@
+# Usage
+#   Start:          docker-compose up
+#   With helpers:   docker-compose -f docker-compose.yml -f ./dev/docker-compose.dev.yml up
+#   Stop:           docker-compose down
+#   Destroy:        docker-compose -f docker-compose.yml -f ./dev/docker-compose.dev.yml down -v --remove-orphans
+
+version: "3.8"
+
+services:
+  studio:
+    container_name: supabase-studio
+    # don't have image version tab
+    image: supabase/studio:latest
+    restart: unless-stopped
+    ports:
+      - ${STUDIO_PORT}:3000/tcp
+    environment:
+      STUDIO_PG_META_URL: http://meta:8080
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+      SUPABASE_URL: http://kong:8000
+      SUPABASE_REST_URL: ${PUBLIC_REST_URL}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+
+  kong:
+    container_name: supabase-kong
+    # image: kong:2.1
+    # image: kong:latest
+    image: kong:2.8.1
+    restart: unless-stopped
+    ports:
+      - ${KONG_HTTP_PORT}:8000/tcp
+      - ${KONG_HTTPS_PORT}:8443/tcp
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
+      # https://github.com/supabase/cli/issues/14
+      KONG_DNS_ORDER: LAST,A,CNAME
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl
+    volumes:
+      - ./volumes/api:/var/lib/kong
+
+  auth:
+    container_name: supabase-auth
+    # image: supabase/gotrue:v2.5.21
+    # image: supabase/gotrue:latest
+    # image: supabase/gotrue:v2.7.2
+    # dev image
+    # image: koakh/koakh-supabase-gotrue:1.0.0
+    image: koakh-supabase-gotrue:latest
+    depends_on:
+      - db # Disable this if you are using an external Postgres database
+    restart: unless-stopped
+    ports:
+      - ${AUTH_HTTP_PORT}:9999/tcp
+    environment:
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: ${AUTH_HTTP_PORT}
+
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?search_path=auth
+
+      GOTRUE_SITE_URL: ${SITE_URL}
+      # GOTRUE_SITE_URL: localhost:8000
+      GOTRUE_URI_ALLOW_LIST: ${ADDITIONAL_REDIRECT_URLS}
+      GOTRUE_DISABLE_SIGNUP: ${DISABLE_SIGNUP}
+
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_JWT_EXP: ${JWT_EXPIRY}
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: ${ENABLE_EMAIL_SIGNUP}
+      GOTRUE_MAILER_AUTOCONFIRM: ${ENABLE_EMAIL_AUTOCONFIRM}
+      GOTRUE_SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL}
+      GOTRUE_SMTP_HOST: ${SMTP_HOST}
+      GOTRUE_SMTP_PORT: ${SMTP_PORT}
+      GOTRUE_SMTP_USER: ${SMTP_USER}
+      GOTRUE_SMTP_PASS: ${SMTP_PASS}
+      GOTRUE_SMTP_SENDER_NAME: ${SMTP_SENDER_NAME}
+      GOTRUE_MAILER_URLPATHS_INVITE: /auth/v1/verify
+      GOTRUE_MAILER_URLPATHS_CONFIRMATION: /auth/v1/verify
+      GOTRUE_MAILER_URLPATHS_RECOVERY: /auth/v1/verify
+      GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE: /auth/v1/verify
+
+      GOTRUE_EXTERNAL_PHONE_ENABLED: ${ENABLE_PHONE_SIGNUP}
+      GOTRUE_SMS_AUTOCONFIRM: ${ENABLE_PHONE_AUTOCONFIRM}
+
+      # https://supabase.com/docs/gotrue/server/about
+      GOTRUE_EXTERNAL_GITHUB_ENABLED: "true"
+      # GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI: "http://localhost:3030/github"
+      # fix two errors
+      # error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
+      # this must match github Authorization callback URL
+      GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
+      # SupaAuth
+      # GOTRUE_EXTERNAL_GITHUB_CLIENT_ID: "42851f570f2a75769ef2"
+      # GOTRUE_EXTERNAL_GITHUB_SECRET: "31fd5482299faf6850f1759c5c24c707d521c7ec"
+      # SupaAuthSelfHost
+      GOTRUE_EXTERNAL_GITHUB_CLIENT_ID: "1b1784ae8fae32549b3c"
+      GOTRUE_EXTERNAL_GITHUB_SECRET: "69ccd3da329c09c11f9255234d326f099f7fafef"
+      # keycloak
+      GOTRUE_EXTERNAL_KEYCLOAK_ENABLED: "true"
+      GOTRUE_EXTERNAL_KEYCLOAK_CLIENT_ID: "supabase"
+      GOTRUE_EXTERNAL_KEYCLOAK_SECRET: "sgTbz86zgZgdL8x7YtPzthZUlkDo0Wup"
+      GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
+      # this url must be accessed from client/browser url, use docker or a online public ip
+      # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+' or use keycloak in url but required add to hosts `172.17.0.1 keycloak`, 172.17.0.1 works without need to add to hssts
+      GOTRUE_EXTERNAL_KEYCLOAK_URL: "http://172.17.0.1:8080/auth/realms/SupaBase"
+      # prod
+      # GOTRUE_EXTERNAL_KEYCLOAK_URL: "https://keycloak.kuartzo.com/auth/realms/SupaBase"
+
+      GOTRUE_EXTERNAL_ORYHYDRA_ENABLED: "true"
+      GOTRUE_EXTERNAL_ORYHYDRA_REDIRECT_URI: "http://localhost:9999/callback"
+      GOTRUE_EXTERNAL_ORYHYDRA_URL: "https://kuartzo.com:444"
+      # GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-13"
+      # GOTRUE_EXTERNAL_ORYHYDRA_SECRET: ".lZbO5k8wJVsBHkPaSTQyM4BZG"
+      GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-14"
+      GOTRUE_EXTERNAL_ORYHYDRA_SECRET: "359XOMNiLpDT8sRN6BA6UjB.y4"
+
+
+  rest:
+    container_name: supabase-rest
+    image: postgrest/postgrest:v9.0.0
+    # image: postgrest/postgrest:latest
+    depends_on:
+      - db # Disable this if you are using an external Postgres database
+    restart: unless-stopped
+    environment:
+      PGRST_DB_URI: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      PGRST_DB_SCHEMAS: ${PGRST_DB_SCHEMAS}
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+
+  realtime:
+    container_name: supabase-realtime
+    # image: supabase/realtime:v0.22.4
+    # image: supabase/realtime:latest
+    image: supabase/realtime:v0.22.6
+    depends_on:
+      - db # Disable this if you are using an external Postgres database
+    restart: unless-stopped
+    environment:
+      DB_HOST: ${POSTGRES_HOST}
+      DB_PORT: ${POSTGRES_PORT}
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_SSL: "false"
+      PORT: 4000
+      JWT_SECRET: ${JWT_SECRET}
+      REPLICATION_MODE: RLS
+      REPLICATION_POLL_INTERVAL: 100
+      SECURE_CHANNELS: "true"
+      SLOT_NAME: supabase_realtime_rls
+      TEMPORARY_SLOT: "true"
+    command: >
+      bash -c "./prod/rel/realtime/bin/realtime eval Realtime.Release.migrate
+      && ./prod/rel/realtime/bin/realtime start"
+
+  storage:
+    container_name: supabase-storage
+    # image: supabase/storage-api:v0.10.0
+    # image: supabase/storage-api:latest
+    image: supabase/storage-api:v0.18.2
+    depends_on:
+      - db # Disable this if you are using an external Postgres database
+      - rest
+    restart: unless-stopped
+    environment:
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      POSTGREST_URL: http://rest:3000
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      PGOPTIONS: -c search_path=storage,public
+      FILE_SIZE_LIMIT: 52428800
+      STORAGE_BACKEND: file
+      FILE_STORAGE_BACKEND_PATH: /var/lib/storage
+      TENANT_ID: stub
+      # TODO: https://github.com/supabase/storage-api/issues/55
+      REGION: stub
+      GLOBAL_S3_BUCKET: stub
+    volumes:
+      - ./volumes/storage:/var/lib/storage
+
+  meta:
+    container_name: supabase-meta
+    # image: supabase/postgres-meta:v0.29.0
+    # image: supabase/postgres-meta:latest
+    image: supabase/postgres-meta:v0.40.0
+    depends_on:
+      - db # Disable this if you are using an external Postgres database
+    restart: unless-stopped
+    environment:
+      PG_META_PORT: 8080
+      PG_META_DB_HOST: ${POSTGRES_HOST}
+      PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+  # Comment out everything below this point if you are using an external Postgres database
+  db:
+    container_name: supabase-db
+    # image: supabase/postgres:14.1.0.21
+    # image: supabase/postgres:latest
+    image: supabase/postgres:14.1.0.34
+    # command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    # note for port -p ${POSTGRES_PORT} to use alternative port 5434 for ex
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf -p ${POSTGRES_PORT}
+    restart: unless-stopped
+    ports:
+      - ${POSTGRES_PORT}:5432
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./volumes/db/data:/var/lib/postgresql/data
+      - ./volumes/db/init:/docker-entrypoint-initdb.d
+
+  pgadmin:
+    # image: dpage/pgadmin4
+    image: dpage/pgadmin4:6.11
+    container_name: supabase-pgadmin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=example
+    ports:
+      - 5480:80
+  mail:
+    container_name: supabase-mail
+    image: inbucket/inbucket:stable
+    ports:
+      # SMTP
+      - 2500:2500
+      # web interface
+      - 9000:9000
+      # POP3
+      - 1100:1100
+
+  keycloak:
+    # image: quay.io/keycloak/keycloak:legacy
+    # image: jboss/keycloak:latest
+    image: jboss/keycloak:16.1.1
+    container_name: supabase-keycloak
+    environment:
+      # h2
+      # DB_VENDOR: H2
+      # KEYCLOAK_USER: admin
+      # KEYCLOAK_PASSWORD: admin
+      # postgres
+      DB_VENDOR: POSTGRES
+      DB_ADDR: ${POSTGRES_HOST}
+      # db must be postgres same has supabase, else fails running container
+      DB_DATABASE: ${POSTGRES_DB}
+      # trick must use public schema else don't create tables
+      DB_SCHEMA: public
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      # after create user, comment and restart keycloak service
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+      # JDBC_PARAMS: "ssl=true"
+    ports:
+      - 8080:8080
+    # volumes:
+      # h2 data
+      # - ./volumes/keycloak/data:/opt/jboss/keycloak/standalone/data/
+    depends_on:
+      - db
+
+  supaauth:
+    # image: koakh/koakh-nextjs-supabase-supaauth:1.0.0
+    image: koakh-nextjs-supabase-supaauth
+    container_name: supabase-supaauth
+    ports:
+      - 3030:3030
+    environment:
+      # this url must be accessed from client/browser url, use docker or a online public ip
+      # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+' or use kong in url but required add to hosts `172.17.0.1 kong`, 172.17.0.1 works without need to add to hssts
+      NEXT_PUBLIC_SUPABASE_URL: http://172.17.0.1:8000
+      NEXT_PUBLIC_SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
+    depends_on:
+      - kong

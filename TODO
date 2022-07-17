@@ -1,4 +1,8 @@
 Project:
+  Server:
+    ☐ Contabo Server use new SupaBase SelfHosted Stack
+    ☐ Disable Standalone Keycloak and use Keycloak from SupabaseStack
+      ☐ caddy update keycloak subdomain to SupabaseStack
   General:
     ☐ @critical rename git hub project name SupaBaseSupaAuthTutorial to other more generic like SupaBaseSelfHostStackPlayWithAuth
   SupaAuth:

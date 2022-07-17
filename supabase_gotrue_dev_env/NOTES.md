@@ -2,6 +2,7 @@
 
 - [NOTES](#notes)
   - [Project Folders](#project-folders)
+  - [Links](#links)
   - [TLDR](#tldr)
   - [Create Ory Hydra Client](#create-ory-hydra-client)
     - [Creating an OAuth 2.0 Client](#creating-an-oauth-20-client)
@@ -26,6 +27,10 @@
     - [Problem #012 Working with InBucket Smtp and Redirect to](#problem-012-working-with-inbucket-smtp-and-redirect-to)
 
 ## Project Folders
+
+## Links
+
+- [GoTrue Auth Server | Supabase](https://supabase.com/docs/gotrue/server/about#get-authorize)
 
 ## TLDR
 

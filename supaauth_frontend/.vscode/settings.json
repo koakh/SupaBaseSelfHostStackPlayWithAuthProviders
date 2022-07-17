@@ -1,0 +1,25 @@
+{
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "cSpell.words": [
+    "Dochub",
+    "flowtype",
+    "gotrue",
+    "Keycloak",
+    "koakh",
+    "nextjs",
+    "oryhydra",
+    "Redir",
+    "Signup",
+    "Supa",
+    "supaauth",
+    "supabase",
+    "tailwindcss",
+    "Varela"
+  ],
+  "explorer.hideFolders": {
+    "node_modules_"
+  }
+}

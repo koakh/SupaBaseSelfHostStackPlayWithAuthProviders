@@ -1,2 +1,16 @@
 Project:
-  ☐ invalid credentials and toast messages errors with tailwind 2.0
+  General:
+    ☐ @critical rename git hub project name SupaBaseSupaAuthTutorial to other more generic like SupaBaseSelfHostStackPlayWithAuth
+  SupaAuth:
+    ☐ @critical invalid credentials and toast messages errors with tailwind 2.0
+    ☐ use access_token from local storage to make a api call to supabase api
+  SupaBase Self Hosted:
+    ✔ add Inbucket mail/smtp @done(22-07-17 23:00)
+      ☐ @low fix port 9000 on acivation url, por must be 8000 (kong)
+  SupaBase GoTrue:
+    ☐ finish oryhydra source code, try to get saved token in storage to see properties used
+  OryHydra:
+    ☐ only used required grant_types in create client, polish create client with minimal data
+    clean client and use only required stuff
+  KeyCloak:
+    ☐ add keywin theme

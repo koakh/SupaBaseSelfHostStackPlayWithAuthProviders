@@ -228,6 +228,16 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=example
     ports:
       - 5480:80
+  mail:
+    container_name: supabase-mail
+    image: inbucket/inbucket:stable
+    ports:
+      # SMTP
+      - 2500:2500
+      # web interface
+      - 9000:9000
+      # POP3
+      - 1100:1100
 
   keycloak:
     # image: quay.io/keycloak/keycloak:legacy

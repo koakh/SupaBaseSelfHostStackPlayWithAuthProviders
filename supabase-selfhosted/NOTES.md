@@ -1,1 +1,1 @@
-started from dupabase repo /docker folder
+started from supabase repo /docker folder

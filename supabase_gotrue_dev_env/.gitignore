@@ -1,0 +1,13 @@
+.env*
+vendor/
+gotrue
+gotrue-arm64
+
+.DS_Store
+.vscode
+www/dist/
+www/.DS_Store
+www/node_modules
+npm-debug.log
+.data
+.bak/*.tgz

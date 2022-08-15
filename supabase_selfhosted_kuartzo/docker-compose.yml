@@ -47,10 +47,11 @@ services:
     # image: supabase/gotrue:latest
     # image: supabase/gotrue:v2.7.2
     # dev image
-    # image: koakh/koakh-supabase-gotrue:1.0.0
-    image: koakh-supabase-gotrue:latest
+    image: koakh/koakh-supabase-gotrue:1.0.0
+    # image: koakh-supabase-gotrue:latest
     depends_on:
-      - db # Disable this if you are using an external Postgres database
+      # Disable this if you are using an external Postgres database
+      - db
     restart: unless-stopped
     ports:
       - ${AUTH_HTTP_PORT}:9999/tcp
@@ -94,26 +95,26 @@ services:
       # fix two errors
       # error=redirect_uri_mismatch&error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
       # this must match github Authorization callback URL
-      GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
+      GOTRUE_EXTERNAL_GITHUB_REDIRECT_URI: "https://kong.kuartzo.com/auth/v1/callback"
       # SupaAuth
       # GOTRUE_EXTERNAL_GITHUB_CLIENT_ID: "42851f570f2a75769ef2"
       # GOTRUE_EXTERNAL_GITHUB_SECRET: "31fd5482299faf6850f1759c5c24c707d521c7ec"
-      # SupaAuthSelfHost
-      GOTRUE_EXTERNAL_GITHUB_CLIENT_ID: "1b1784ae8fae32549b3c"
-      GOTRUE_EXTERNAL_GITHUB_SECRET: "69ccd3da329c09c11f9255234d326f099f7fafef"
+      # SupaAuthSelfHostOnKuartzo
+      GOTRUE_EXTERNAL_GITHUB_CLIENT_ID: "c2a110c8d758da808ef8"
+      GOTRUE_EXTERNAL_GITHUB_SECRET: "7ec6487066e177218cc728defdb94ef8c4be47ce"
       # keycloak
       GOTRUE_EXTERNAL_KEYCLOAK_ENABLED: "true"
       GOTRUE_EXTERNAL_KEYCLOAK_CLIENT_ID: "supabase"
-      GOTRUE_EXTERNAL_KEYCLOAK_SECRET: "sgTbz86zgZgdL8x7YtPzthZUlkDo0Wup"
-      GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
+      GOTRUE_EXTERNAL_KEYCLOAK_SECRET: "ZL58Efn1Z0iIrqNWoXpXGveZ1YjLzam7"
+      GOTRUE_EXTERNAL_KEYCLOAK_REDIRECT_URI: "https://kong.kuartzo.com/auth/v1/callback"
       # this url must be accessed from client/browser url, use docker or a online public ip
       # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+' or use keycloak in url but required add to hosts `172.17.0.1 keycloak`, 172.17.0.1 works without need to add to hssts
-      GOTRUE_EXTERNAL_KEYCLOAK_URL: "http://172.17.0.1:8080/auth/realms/SupaBase"
+      GOTRUE_EXTERNAL_KEYCLOAK_URL: "https://keycloak.kuartzo.com/auth/realms/SupaBase"
       # prod
       # GOTRUE_EXTERNAL_KEYCLOAK_URL: "https://keycloak.kuartzo.com/auth/realms/SupaBase"
       # oryhydra
       GOTRUE_EXTERNAL_ORYHYDRA_ENABLED: "true"
-      GOTRUE_EXTERNAL_ORYHYDRA_REDIRECT_URI: "http://localhost:8000/auth/v1/callback"
+      GOTRUE_EXTERNAL_ORYHYDRA_REDIRECT_URI: "https://kong.kuartzo.com/auth/v1/callback"
       GOTRUE_EXTERNAL_ORYHYDRA_URL: "https://kuartzo.com:444"
       GOTRUE_EXTERNAL_ORYHYDRA_CLIENT_ID: "supabase-client-oauth-pkce-15"
       GOTRUE_EXTERNAL_ORYHYDRA_SECRET: "b7HWgJVS5nrVeoCa.lbLYnGFh1"
@@ -207,9 +208,9 @@ services:
     # note for port -p ${POSTGRES_PORT} to use alternative port 5434 for ex
     command: postgres -c config_file=/etc/postgresql/postgresql.conf -p ${POSTGRES_PORT}
     restart: unless-stopped
-    ports:
-      # TODO: replace 5432 with ${POSTGRES_PORT}
-      - ${POSTGRES_PORT}:5432
+    # don't expose, else gives problems with studio?
+    # ports:
+    #   - ${POSTGRES_PORT}:5432
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
@@ -274,15 +275,16 @@ services:
       - db
 
   supaauth:
-    # image: koakh/koakh-nextjs-supabase-supaauth:1.0.0
-    image: koakh-nextjs-supabase-supaauth
+    image: koakh/koakh-nextjs-supabase-supaauth:1.0.0
+    # image: koakh-nextjs-supabase-supaauth
     container_name: supabase-supaauth
     ports:
       - ${SUPAAUTH_PORT}:3030
     environment:
       # this url must be accessed from client/browser url, use docker or a online public ip
       # local: ip addr show docker0 | grep -Po 'inet \K[\d.]+' or use kong in url but required add to hosts `172.17.0.1 kong`, 172.17.0.1 works without need to add to hssts
-      NEXT_PUBLIC_SUPABASE_URL: http://172.17.0.1:8000
+      NEXT_PUBLIC_SUPABASE_URL: https://kong.kuartzo.com
+      NEXT_PUBLIC_REDIRECT_URL: https://supademo.kuartzo.com
       NEXT_PUBLIC_SUPABASE_KEY: ${ANON_KEY}
     depends_on:
       - kong

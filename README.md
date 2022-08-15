@@ -17,3 +17,6 @@
 - supabase_selfhosted
   - **SupaBaseSelfhosted** (supabase-selfhosted dir)
   - supabase self hosted docker stack with keycloak and supaauth
+
+- supabase_selfhosted_kuartzo
+  - backup files only, source of true is server files

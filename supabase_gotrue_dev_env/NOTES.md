@@ -286,10 +286,10 @@ try create a OAuth 2.0 Authorization Code Grant
   "refresh_token"
 ], -->
 
-// TODO: THE REAL CLIENT
+// TODO: THE REAL CLIENT <<<<<<<<<<<<<<<<<
 
 ```shell
-$ CLIENT="supabase-client-oauth-pkce-14"
+$ CLIENT="supabase-client-oauth-pkce-15"
 $ docker-compose -f quickstart.yml exec hydra \
 	hydra clients create \
 	--endpoint http://127.0.0.1:4445 \
@@ -298,13 +298,15 @@ $ docker-compose -f quickstart.yml exec hydra \
 	--grant-types client_credentials,authorization_code,implicit,refresh_token \
 	--response-types code,id_token \
 	--scope openid,profile,email,offline_access,phone \
-	--callbacks http://localhost:9999/callback \
-  --allowed-cors-origins http://localhost:3030
+	--callbacks http://localhost:9999/callback,http://localhost:8000/auth/v1/callback,https://kong.kuartzo.com/auth/v1/callback,https://agtwhwsxgdjudvmebpts.supabase.co/auth/v1/callback
+  # --allowed-cors-origins http://localhost:3030
 # outcome
 # OAuth 2.0 Client ID: supabase-client-oauth-pkce-13
 # OAuth 2.0 Client Secret: .lZbO5k8wJVsBHkPaSTQyM4BZG
-OAuth 2.0 Client ID: supabase-client-oauth-pkce-14
-OAuth 2.0 Client Secret: 359XOMNiLpDT8sRN6BA6UjB.y4
+# OAuth 2.0 Client ID: supabase-client-oauth-pkce-14
+# OAuth 2.0 Client Secret: 359XOMNiLpDT8sRN6BA6UjB.y4
+OAuth 2.0 Client ID: supabase-client-oauth-pkce-15
+OAuth 2.0 Client Secret: b7HWgJVS5nrVeoCa.lbLYnGFh1
 ```
 
 > NOTE: for generated client secret after we add `--token-endpoint-auth-method client_secret_post`, with `--token-endpoint-auth-method  none` will show `This OAuth 2.0 Client has no secret`, seems that this is step forword
@@ -672,7 +674,7 @@ here what we found is that we need to **build image** and **run image** with a a
 when nextjs builds bundle it hard code this in bundle on build step, and this and env variable in `.env.production` is what makes it works
 
 read comments in `.env.production` etc
-to work better we rename `.env.local` to `.env.dev`, else build steps read both at build time
+to work better we rename `.env.local` to `.env.development`, else build steps read both at build time
 
 ```shell
 # build image

@@ -5,9 +5,10 @@
     "alwaysDisplayInConsole": false,
     "clientAuthenticatorType": "client-secret",
     "redirectUris": [
-        "https://agtwhwsxgdjudvmebpts.supabase.co/auth/v1/callback",
         "http://localhost:9999/callback",
-        "http://localhost:8000/auth/v1/callback"
+        "http://localhost:8000/auth/v1/callback",
+        "https://kong.kuartzo.com/auth/v1/callback",
+        "https://agtwhwsxgdjudvmebpts.supabase.co/auth/v1/callback"
     ],
     "webOrigins": [],
     "notBefore": 0,

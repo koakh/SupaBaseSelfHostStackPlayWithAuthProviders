@@ -1,20 +1,29 @@
 Project:
   Server:
-    ☐ Contabo Server use new SupaBase SelfHosted Stack
-    ☐ Disable Standalone Keycloak and use Keycloak from SupabaseStack
-      ☐ caddy update keycloak subdomain to SupabaseStack
+    ✔ Contabo Server use new SupaBase SelfHosted Stack @done(22-07-21 00:22)
+    ✔ Disable Standalone Keycloak and use Keycloak from SupabaseStack @done(22-07-21 00:22)
+    ✔ caddy update keycloak subdomain to SupabaseStack @done(22-07-21 00:22)
   General:
-    ☐ @critical rename git hub project name SupaBaseSupaAuthTutorial to other more generic like SupaBaseSelfHostStackPlayWithAuth
+    ✔ rename git hub project name SupaBaseSupaAuthTutorial to other more generic like SupaBaseSelfHostStackPlayWithAuthProviders @done(22-07-21 00:23)
   SupaAuth:
-    ☐ @critical invalid credentials and toast messages errors with tailwind 2.0
-    ☐ use access_token from local storage to make a api call to supabase api
+    ☐ @critical invalid credentials and toast messages errors in tailwind 3.0
+    ☐ @critical use access_token from local storage to make a api call to supabase rest api
   SupaBase Self Hosted:
     ✔ add Inbucket mail/smtp @done(22-07-17 23:00)
-      ☐ @low fix port 9000 on acivation url, por must be 8000 (kong)
+      ☐ @low Inbucket fix port 9000 on acivation url, por must be 8000 (kong)
   SupaBase GoTrue:
     ☐ finish oryhydra source code, try to get saved token in storage to see properties used
   OryHydra:
+    ✔ deploy new consent app without blue background @done(22-07-21 00:19)
     ☐ only used required grant_types in create client, polish create client with minimal data
-    clean client and use only required stuff
+      clean client and use only required stuff
+    ☐ @critical bring working files down
+    ☐ @critical persist oryhydra clients after restart
   KeyCloak:
-    ☐ add keywin theme
+    ✔ add keywin theme @done(22-07-21 00:20)
+  SelfHost Kuartzo Production:
+    ✔ add ./volumes/keycloak/themes/keywind.jar @done(22-07-19 23:51)
+    ☐ @critical finish NOTES adding all diferences from `supabase_selfhosted` to `supabase_selfhosted_kuartzo`
+    ☐ @critical protect secrets from push to repo
+    ☐ @critical change .env and kong jwt tokens, generate jwt keys that work, and take notes for it
+      https://www.youtube.com/watch?v=HCqta43JHkU

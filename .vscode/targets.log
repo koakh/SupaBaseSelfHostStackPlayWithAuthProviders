@@ -8,10 +8,12 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jul 17 23:50:41 2022
+# Make data base, printed on Mon Aug 15 22:39:22 2022
 
 # Variables
 
+# environment
+PROVIDE_FULLSTACK_ACTION = true
 # environment
 JAVA_HOME = /usr/lib/jvm/jdk-11.0.13+8
 # environment
@@ -27,21 +29,25 @@ PNPM_HOME = /home/mario/.local/share/pnpm
 # environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/home/mario/.gtkrc:/home/mario/.config/gtkrc
 # environment
-TMPDIR = /tmp
+STARSHIP_SESSION_KEY = 8801209191769817
+# environment
+UUID = 79bae37c-bfdf-4e04-a7c8-b20c42fca42d
 # environment
 WINDOWMANAGER = /usr/bin/startplasma-x11
 # environment
 LC_NUMERIC = pt_PT.UTF-8
 # environment
-VSCODE_CWD = /mnt/storage/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
+VSCODE_CWD = /home/mario
 # environment
-GPG_TTY = /dev/pts/10
+GPG_TTY = not a tty
 # environment
 MACHTYPE = x86_64-suse-linux
 # environment
 NVM_DIR = /home/mario/.nvm
 # default
 MAKE_COMMAND := make
+# environment
+THREE_SCALE_USER_TOKEN = 207c527cfc2a6b8dcf4fa43ad7a976da
 # environment
 GOPATH = /home/mario/work
 # automatic
@@ -53,7 +59,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/mario/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
+PWD = /mnt/storage/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
 # environment
 HOST = koakh-laptop
 # automatic
@@ -68,8 +74,6 @@ MAIL = /var/spool/mail/mario
 XNLSPATH = /usr/share/X11/nls
 # environment
 XDG_DATA_DIRS = /home/mario/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/share:/var/lib/snapd/desktop
-# environment
-OLDPWD = /home/mario/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders/keycloak
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # automatic
@@ -87,7 +91,7 @@ LANG = C
 # environment
 GUESTFISH_OUTPUT = \e[0m
 # environment
-XAUTHORITY = /run/user/1000/xauth_rSWqMz
+XAUTHORITY = /run/user/1000/xauth_URebte
 # default
 .LOADED := 
 # environment
@@ -103,6 +107,8 @@ MAKEFLAGS = pqrR
 # makefile
 CURDIR := /mnt/storage/Development/SupaBase/SupaBaseSelfHostStackPlayWithAuthProviders
 # environment
+UTM_SOURCE = vscode
+# environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 LESSOPEN = lessopen.sh %s
@@ -111,7 +117,7 @@ LESSOPEN = lessopen.sh %s
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-XXXXXXboYTtb/agent.19493
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXXPRgIzt/agent.5636
 # default
 .SHELLFLAGS := -c
 # environment
@@ -133,7 +139,7 @@ MAKEFILE_LIST :=
 # environment
 LC_COLLATE = pt_PT.UTF-8
 # environment
-VSCODE_PID = 22634
+VSCODE_PID = 12265
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -143,7 +149,7 @@ XAUTHLOCALHOSTNAME = koakh-laptop
 # environment
 SDK_HOME = /usr/lib/jvm/jdk-11.0.13+8
 # environment
-SESSION_MANAGER = local/koakh-laptop:@/tmp/.ICE-unix/19721,unix/koakh-laptop:/tmp/.ICE-unix/19721
+SESSION_MANAGER = local/koakh-laptop:@/tmp/.ICE-unix/5934,unix/koakh-laptop:/tmp/.ICE-unix/5934
 # automatic
 *F = $(notdir $*)
 # environment
@@ -173,15 +179,15 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=local
 # environment
-SHLVL = 3
+DENO_INSTALL = /home/mario/.deno
+# environment
+SHLVL = 0
 # environment
 MAKELEVEL := 0
-# environment
-_fish_MC_PWD_FILE = /tmp/mc-mario/mc.pwd.20303
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/mario/.local/share/pnpm:/home/mario/.local/share/solana/install/active_release/bin:/usr/lib/jvm/jdk-11.0.13+8/bin:/home/mario/.local/share/solana/install/active_release/bin:/home/mario/.local/share/pnpm:/home/mario/.cargo/bin:/home/mario/.local/share/solana/install/active_release/bin:/usr/lib/jvm/jdk-11.0.13+8/bin:/home/mario/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin:/home/mario/Android/Sdk/tools:/home/mario/Android/Sdk/platform-tools:/opt/flutter/bin:/usr/local/go/bin:/home/mario/Android/Sdk/tools:/home/mario/Android/Sdk/platform-tools:/opt/flutter/bin:/usr/local/go/bin
+PATH = /home/mario/.local/share/solana/install/active_release/bin:/home/mario/.surrealdb:/home/mario/.tiup/bin:/home/mario/.deno/bin:/home/mario/.local/share/pnpm:/home/mario/.local/share/solana/install/active_release/bin:/usr/lib/jvm/jdk-11.0.13+8/bin:/home/mario/.local/share/solana/install/active_release/bin:/home/mario/.surrealdb:/home/mario/.tiup/bin:/home/mario/.deno/bin:/home/mario/.local/share/pnpm:/home/mario/.cargo/bin:/home/mario/.local/share/solana/install/active_release/bin:/usr/lib/jvm/jdk-11.0.13+8/bin:/home/mario/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin:/home/mario/Android/Sdk/tools:/home/mario/Android/Sdk/platform-tools:/opt/flutter/bin:/usr/local/go/bin:/home/mario/Android/Sdk/tools:/home/mario/Android/Sdk/platform-tools:/opt/flutter/bin:/usr/local/go/bin
 # default
 MAKEFILES := 
 # environment
@@ -193,13 +199,13 @@ LC_TIME = pt_PT.UTF-8
 # environment
 OSTYPE = linux
 # environment
-MC_TMPDIR = /tmp/mc-mario
-# environment
-INVOCATION_ID = 3374ddda77454b5580fc1e7235d60cd5
+INVOCATION_ID = 96055bd35f5b48e8bbf9378b6b360277
 # environment
 MINICOM = -c on
 # environment
 CPU = x86_64
+# environment
+RECOMMENDER_API_URL = https://gw.api.openshift.io//api/v2
 # environment
 LESSCLOSE = lessclose.sh %s %s
 # automatic
@@ -232,8 +238,6 @@ DESKTOP_SESSION = /usr/share/xsessions/plasma5
 CONFIG_SITE = /usr/share/site/x86_64-pc-linux-gnu
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = KDE
-# environment
-MC_SID = 16967
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
@@ -249,9 +253,7 @@ XDG_VTNR = 7
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 19882
-# environment
-HISTCONTROL = ignoreboth
+SYSTEMD_EXEC_PID = 8293
 # environment
 DISPLAY = :0
 # environment
@@ -263,17 +265,18 @@ MAKE_VERSION := 4.3
 # environment
 KDE_SESSION_UID = 1000
 # environment
-GUAKE_TAB_UUID = 7e0d688b-142e-4b9b-8147-4f2110df5d3d
-# environment
-MANAGERPID = 19479
+MANAGERPID = 5457
 # environment
 LC_MEASUREMENT = pt_PT.UTF-8
 # environment
+STARSHIP_SHELL = bash
+# environment
 CVS_RSH = ssh
 # environment
-SSH_AGENT_PID = 19672
+SSH_AGENT_PID = 5856
 # environment
 PAGER = less
+ 
 # environment
 _ = /usr/bin/make
 # environment
@@ -281,13 +284,13 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 G_BROKEN_FILENAMES = 1
 # environment
-COLORTERM = truecolor
-# environment
 NVM_CD_FLAGS = 
 # environment
 GOMODCACHE = /home/mario/work/pkg/mod
 # environment
-JOURNAL_STREAM = 8:53810
+JOURNAL_STREAM = 8:74981
+# environment
+GOLANG_EXECUTABLE = go
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -295,7 +298,6 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 XKEYSYMDB = /usr/X11R6/lib/X11/XKeysymDB
 # environment
- 
 GTK2_RC_FILES = /etc/gtk-2.0/gtkrc:/home/mario/.gtkrc-2.0:/home/mario/.config/gtkrc-2.0
 # environment
 HOME = /home/mario
@@ -310,9 +312,9 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-c32a2d28-1.69.1-main.sock
 # environment
-TERM = xterm-256color
+TERM = xterm
 # environment
-XDG_SESSION_ID = 3
+XDG_SESSION_ID = 4
 # environment
 XCURSOR_SIZE = 24
 # environment
@@ -328,11 +330,7 @@ QT_AUTO_SCREEN_SCALE_FACTOR = 0
 # environment
 GUESTFISH_RESTORE = \e[0m
 # environment
-VSCODE_CLI = 1
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-VTE_VERSION = 6800
+TELEMETRY_ID = 0f5c1a9b-dac4-4fc6-9fb4-3942884f319c
 # environment
 LS_OPTIONS = -N --color=tty -T 0
 # environment
@@ -344,7 +342,7 @@ KDE_FULL_SESSION = true
 # environment
 JRE_HOME = /usr/lib64/jvm/java-11-openjdk-11
 # variable set hash-table stats:
-# Load=165/1024=16%, Rehash=0, Collisions=23/192=12%
+# Load=164/1024=16%, Rehash=0, Collisions=23/191=12%
 
 # Pattern-specific Variable Values
 
@@ -352,9 +350,9 @@ JRE_HOME = /usr/lib64/jvm/java-11-openjdk-11
 
 # Directories
 
-# . (device 66311, inode 791989): 11 files, no impossibilities.
+# . (device 66311, inode 791989): 14 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -404,12 +402,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 195 B / avg = 10 B
-# current buf: size = 8162 B / used = 195 B / count = 19 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 22 / storage = 243 B / avg = 11 B
+# current buf: size = 8162 B / used = 243 B / count = 22 / avg = 11 B
 
-# strcache performance: lookups = 22 / hit rate = 13%
+# strcache performance: lookups = 25 / hit rate = 12%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=0/22=0%
-# Finished Make data base on Sun Jul 17 23:50:41 2022
+# Load=22/8192=0%, Rehash=0, Collisions=0/25=0%
+# Finished Make data base on Mon Aug 15 22:39:22 2022
 
  

@@ -9,6 +9,9 @@ import { supabase } from '~/lib/supabase';
 // dependency for signIn, signUp - we'll define it shortly in a separate file
 import { SupabaseAuthPayload } from './auth.types';
 
+const redirectUrl: string =
+  process.env.NEXT_PUBLIC_REDIRECT_URL || 'http://localhost:3030';
+
 // - signUp so that we can sign-up from anywhere in the app
 // - signIn so that we can sign in from anywhere in the app
 //   Today homepage / is using these methods, tomorrow dedicated /sign-up or /sign-in pages might
@@ -164,7 +167,8 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         // https://supabase.com/docs/reference/javascript/auth-signin
         // While doing a 3rd party login it's common to redirect your users to a special/specific page. You can do the same by
         // must be added to `Additional redirect URLs`
-        redirectTo: 'http://localhost:3030/github',
+        // redirectTo: 'http://localhost:3030/github',
+        redirectTo: `${redirectUrl}/github`,
         // sign In with scopes too
         scopes: 'repo gist notifications',
       }
@@ -176,7 +180,8 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     await supabase.auth.signIn(
       { provider: 'keycloak' },
       {
-        redirectTo: 'http://localhost:3030/keycloak',
+        // redirectTo: 'http://localhost:3030/keycloak',
+        redirectTo: `${redirectUrl}/keycloak`,
         // scopes: '',
       }
     );
@@ -191,7 +196,8 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
       // eslint-disable-next-line
       { provider: 'oryhydra' },
       {
-        redirectTo: 'http://localhost:3030/oryhydra',
+        // redirectTo: 'http://localhost:3030/oryhydra',
+        redirectTo: `${redirectUrl}/github`,
         // scopes: '',
       }
     );

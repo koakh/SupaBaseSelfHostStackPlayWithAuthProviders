@@ -9,6 +9,7 @@
     - [Enable Semi](#enable-semi)
   - [GitHub OAUth2 Application SupaBase Hosted](#github-oauth2-application-supabase-hosted)
   - [GitHub OAUth2 Application SupaBase SelfHosted](#github-oauth2-application-supabase-selfhosted)
+  - [GitHub OAUth2 Application SupaBase SelfHosted on Kuartzo](#github-oauth2-application-supabase-selfhosted-on-kuartzo)
   - [Add Keycloak Integration](#add-keycloak-integration)
     - [Without Docker Compose](#without-docker-compose)
       - [PostgreSQL Example](#postgresql-example)
@@ -101,6 +102,12 @@ Client Secret: 31fd5482299faf6...........
 - [SupaAuthSelfHost](https://github.com/settings/applications/1945830)
 
 ![image](attachements/2022-07-17-23-19-20.png)
+
+## GitHub OAUth2 Application SupaBase SelfHosted on Kuartzo
+
+- [SupaAuthSelfHostOnKuartzo](https://github.com/settings/applications/1954191)
+
+- ![image](attachements/2022-07-19-22-27-48.png)
 
 ## Add Keycloak Integration
 
